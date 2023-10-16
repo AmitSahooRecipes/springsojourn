@@ -8,4 +8,4 @@ COPY --chown=ec2-user:app ./${JAR_FILE} /home/ec2-user/
 COPY --chown=ec2-user:app ./entrypoint.sh /home/ec2-user/
 RUN chmod u+x /home/ec2-user/entrypoint.sh
 WORKDIR /home/ec2-user
-CMD ["/home/ec2-user/entrypoint.sh"]
+# CMD ["/home/ec2-user/entrypoint.sh"]
