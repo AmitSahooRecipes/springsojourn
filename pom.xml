@@ -227,7 +227,7 @@
 						<goals>
 							<goal>push</goal>
 						</goals>
-						<phase>install</phase>
+						<phase>deploy</phase>
 					</execution>
 				</executions>
 			</plugin>
