@@ -20,7 +20,6 @@
 		<docker.group>amitsahoo</docker.group>
 		<docker.platforms>linux/amd64,linux/arm64/v8</docker.platforms>
 		<docker.directory>${project.basedir}/target/dependency</docker.directory>
-		<docker.buildArg.jarName>${docker.jarfile}</docker.buildArg.jarName>
 		<publishArtifacts>false</publishArtifacts>
 	</properties>
 	<!-- jetty -->
@@ -77,7 +76,7 @@
 		<profile>
 			<id>tomcat</id>
 			<activation>
-				<activeByDefault>Y</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<dependencies>
 				<dependency>
@@ -185,6 +184,7 @@
 									<directory>${project.basedir}</directory>
 									<includes>
 										<include>Dockerfile</include>
+										<include>entrypoint.sh</include>
 									</includes>
 								</resource>
 							</resources>
@@ -202,6 +202,9 @@
 							<name>${docker.group}/${project.artifactId}:${project.version}</name>
 							<build>
 								<dockerFileDir>${project.basedir}/target/dependency</dockerFileDir>
+								<args>
+									<JAR_NAME>${docker.jarfile}</JAR_NAME>
+								</args>
 								<buildx>
 									<platforms>
 										<platform>linux/arm64/v8</platform>
@@ -217,7 +220,7 @@
 				<executions>
 					<execution>
 						<id>docker-build</id>
-						<phase>install</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>build</goal>
 						</goals>
@@ -233,4 +236,11 @@
 			</plugin>
 		</plugins>
 	</build>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>a0xf9ltelyet3-artifactory-primary-0-snapshots</name>
+			<url>https://amitsahoo.jfrog.io/artifactory/libs-snapshot</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
